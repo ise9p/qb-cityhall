@@ -15,7 +15,7 @@ CreateThread(function()
         SetEntityInvincible(created_ped, true)
         SetBlockingOfNonTemporaryEvents(created_ped, true)
     end
-end)
+end) 44
 
 CreateThread(function()
     local blip = AddBlipForCoord(Config.CityHallBlip.coords.x, Config.CityHallBlip.coords.y, Config.CityHallBlip.coords.z)
