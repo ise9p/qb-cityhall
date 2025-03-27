@@ -15,7 +15,7 @@ CreateThread(function()
         SetEntityInvincible(created_ped, true)
         SetBlockingOfNonTemporaryEvents(created_ped, true)
     end
-end) 
+end)
 
 CreateThread(function()
     local blip = AddBlipForCoord(Config.CityHallBlip.coords.x, Config.CityHallBlip.coords.y, Config.CityHallBlip.coords.z)
@@ -31,40 +31,67 @@ CreateThread(function()
 end)
 
 CreateThread(function()
-    while true do
-        toPed = false
-        wait = 1000
-        for k, v in pairs(Config.NPC) do
-            local pos = GetEntityCoords(PlayerPedId())
-            local Distance = #(pos - vector3(v.coords.x, v.coords.y, v.coords.z))
-            if Distance < 2 then
-                toPed = true
-                wait = 5
-                if Config.showTextUI == "qb" then
-                    exports["qb-core"]:DrawText(Config.TextUILabelE, "left")
-                elseif Config.showTextUI == "ox" then
-                    lib.showTextUI(Config.TextUILabelE, { position = "left-center" })
-                elseif Config.showTextUI == "mt" then
-                    exports.mt_lib:showTextUI(Config.TextUILabel, 'E', 'left')
-                end
-                if IsControlJustPressed(0, 38) then
-                    TriggerEvent('qb-cityhall:mainMenu')
-                end
-            else
-                if Config.showTextUI == "qb" then
-                    exports["qb-core"]:HideText()
-                elseif Config.showTextUI == "ox" then
-                    lib.hideTextUI()
-                elseif Config.showTextUI == "mt" then
-                    exports.mt_lib:hideTextUI()
-                end
-                wait = 1000
-            end
+    if Config.Ped == "target" then
+        if Config.target == "qb" then
+            exports['qb-target']:AddTargetModel(Config.NPC[1].model, {
+                options = {
+                    {
+                        type = "client",
+                        event = "qb-cityhall:mainMenu",
+                        icon = "fas fa-city",
+                        label = "Access City Hall",
+                    }
+                },
+                distance = 2.5,
+            })
+        elseif Config.target == "ox" then
+            exports.ox_target:addModel(Config.NPC[1].model, {
+                {
+                    name = 'cityhall_access',
+                    icon = "fas fa-city",
+                    label = "Access City Hall",
+                    onSelect = function()
+                        TriggerEvent("qb-cityhall:mainMenu")
+                    end,
+                    distance = 2.5,
+                }
+            })
         end
-        Wait(wait)
+    elseif Config.Ped == "DrewText" then
+        while true do
+            toPed = false
+            wait = 1000
+            for k, v in pairs(Config.NPC) do
+                local pos = GetEntityCoords(PlayerPedId())
+                local Distance = #(pos - vector3(v.coords.x, v.coords.y, v.coords.z))
+                if Distance < 2 then
+                    toPed = true
+                    wait = 5
+                    if Config.showTextUI == "qb" then
+                        exports["qb-core"]:DrawText(Config.TextUILabelE, "left")
+                    elseif Config.showTextUI == "ox" then
+                        lib.showTextUI(Config.TextUILabelE, { position = "left-center" })
+                    elseif Config.showTextUI == "mt" then
+                        exports["mt_lib"]:DrawText(Config.TextUILabelE)
+                    end
+                    if IsControlJustPressed(0, 38) then
+                        TriggerEvent('qb-cityhall:mainMenu')
+                    end
+                else
+                    if Config.showTextUI == "qb" then
+                        exports["qb-core"]:HideText()
+                    elseif Config.showTextUI == "ox" then
+                        lib.hideTextUI()
+                    elseif Config.showTextUI == "mt" then
+                        exports["mt_lib"]:HideText()
+                    end
+                    wait = 1000
+                end
+            end
+            Wait(wait)
+        end
     end
 end)
-
 
 RegisterNetEvent('qb-cityhall:mainMenu', function()
     if Config.menu == "qb" then
@@ -227,4 +254,12 @@ RegisterNetEvent('qb-cityhall:cardMenu', function(data)
         lib.registerContext(cardMenu)
         lib.showContext('card_menu')
     end
+end)
+
+RegisterNetEvent('qb-cityhall:giveitem', function(data)
+    TriggerServerEvent('qb-cityhall:giveitem', data)
+end)
+
+RegisterNetEvent('qb-cityhall:setjob', function(data)
+    TriggerServerEvent('qb-cityhall:setjob', data)
 end)
