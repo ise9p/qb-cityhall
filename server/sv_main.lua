@@ -36,12 +36,24 @@ RegisterServerEvent('qb-cityhall:setjob', function(data)
 
 
         if jobConfig and jobConfig.underMaintenance then
-            TriggerClientEvent('QBCore:Notify', src, 'This job is currently under maintenance. Please try again later.', 'error')
+            if Config.notify == "qb" then
+                TriggerClientEvent('QBCore:Notify', src, 'This job is currently under maintenance. Please try again later.', 'error')
+            elseif Config.notify == "ox" then
+                TriggerClientEvent('ox_lib:notify', src, {type = 'error', description = 'This job is currently under maintenance. Please try again later.'})
+            end
         elseif currentJob == data.job then
-            TriggerClientEvent('QBCore:Notify', src, 'You already have ' .. data.job .. '!', 'error')
+            if Config.notify == "qb" then
+                TriggerClientEvent('QBCore:Notify', src, 'You already have ' .. data.job .. '!', 'error')
+            elseif Config.notify == "ox" then
+                TriggerClientEvent('ox_lib:notify', src, {type = 'error', description = 'You already have ' .. data.job .. '!'})
+            end
         else
             Player.Functions.SetJob(data.job, data.grade)
-            TriggerClientEvent('QBCore:Notify', src, 'Your job has been set to ' .. data.job, 'success')
+            if Config.notify == "qb" then
+                TriggerClientEvent('QBCore:Notify', src, 'Your job has been set to ' .. data.job, 'success')
+            elseif Config.notify == "ox" then
+                TriggerClientEvent('ox_lib:notify', src, {type = 'success', description = 'Your job has been set to ' .. data.job})
+            end
 
             local logData = {
                 username = "CityHall Log",
@@ -86,7 +98,11 @@ RegisterServerEvent('qb-cityhall:giveitem', function(data)
     local identifiers = GetIdentifiers(src)
 
     if Player.Functions.GetItemByName(data.item) then
-        TriggerClientEvent('QBCore:Notify', src, 'You already have ' .. data.label .. '!', 'error')
+        if Config.notify == "qb" then
+            TriggerClientEvent('QBCore:Notify', src, 'You already have ' .. data.label .. '!', 'error')
+        elseif Config.notify == "ox" then
+            TriggerClientEvent('ox_lib:notify', src, {type = 'error', description = 'You already have ' .. data.label .. '!'})
+        end
     else
         local info = {}
         if data.item == "id_card" then
@@ -113,7 +129,11 @@ RegisterServerEvent('qb-cityhall:giveitem', function(data)
 
         if data.price then
             if Player.Functions.RemoveMoney('cash', data.price) then
-                TriggerClientEvent('QBCore:Notify', src, 'You have received ' .. data.label .. ' and paid ' .. data.price .. ' cash', 'success')
+                if Config.notify == "qb" then
+                    TriggerClientEvent('QBCore:Notify', src, 'You have received ' .. data.label .. ' and paid ' .. data.price .. ' cash', 'success')
+                elseif Config.notify == "ox" then
+                    TriggerClientEvent('ox_lib:notify', src, {type = 'success', description = 'You have received ' .. data.label .. ' and paid ' .. data.price .. ' cash'})
+                end
 
                 local itemLogData = {
                     username = "CityHall Log",
@@ -148,7 +168,11 @@ RegisterServerEvent('qb-cityhall:giveitem', function(data)
                     end
                 end, 'POST', json.encode(itemLogData), { ['Content-Type'] = 'application/json' })
             else
-                TriggerClientEvent('QBCore:Notify', src, 'You do not have enough cash!', 'error')
+                if Config.notify == "qb" then
+                    TriggerClientEvent('QBCore:Notify', src, 'You do not have enough cash!', 'error')
+                elseif Config.notify == "ox" then
+                    TriggerClientEvent('ox_lib:notify', src, {type = 'error', description = 'You do not have enough cash!'})
+                end
             end
         end
     end
