@@ -1,20 +1,23 @@
 Config = {}
 
-Config.TextUILabel = 'City Hall' 
-Config.TextUILabelE = '[E] City Hall' 
+Config.TextUILabel = 'City Hall' -- ox_lib/mt_lib text ui
+Config.TextUILabelE = '[E] City Hall'  -- qbcore text ui
 
 Config.WebhookURL = ""
 
 Config.NPC = {
     [1] = {
-        coords = vector4(233.42, -417.67, 48.1, 346.35),  -- 
+        coords = vector4(237.75, -413.09, 48.11, 345.65),  -- 
         model = "s_m_m_fiboffice_02", 
         synced = true 
     },
 }
 
-Config.menu = 'ox'
-Config.showTextUI = 'ox'
+Config.menu = 'qb' -- [ 'qb' qb-menu or 'ox' ox_lib menu ]
+Config.showTextUI = 'qb' -- [ 'qb' or 'ox' ox_lib or 'mt' mt_lib ]
+Config.notify = 'qb' -- [ 'qb' or 'ox' ox_lib ]
+Config.Ped = 'target' -- [ 'target' or 'DrewText' ]
+Config.target = 'qb' -- [ 'qb' qb-target or 'ox' ox_target ]
 
 --[[ 
     underMaintenance = false, -- الوظيفة متاحة
@@ -23,6 +26,14 @@ Config.showTextUI = 'ox'
 Config.Jobs = {
     {label = 'Unemployed', job = 'unemployed', grade = '0', icon = 'fas fa-broom', underMaintenance = false},  
     {label = 'Garbage', job = 'garbage', grade = '0', icon = 'fas fa-trash', underMaintenance = false},  
+    {label = 'Tow Truck', job = 'tow', grade = '0', icon = 'fas fa-truck-loading', underMaintenance = true},  
+    {label = 'Trucker', job = 'trucker', grade = '0', icon = 'fas fa-truck', underMaintenance = false},  
+    {label = 'Fishing', job = 'fishing', grade = '0', icon = 'fa-solid fa-fish', underMaintenance = false},  
+    {label = 'Lumberjack', job = 'lumberjack', grade = '0', icon = 'fa-solid fa-tree', underMaintenance = false},  
+    {label = 'Mining', job = 'mining', grade = '0', icon = 'fa-solid fa-spoon', underMaintenance = false},  
+    {label = 'Taxi', job = 'taxi', grade = '0', icon = 'fa-solid fa-taxi', underMaintenance = false},  
+    {label = 'Bus', job = 'bus', grade = '0', icon = 'fa-solid fa-bus', underMaintenance = false}, 
+    {label = 'Farming', job = 'farming', grade = '0', icon = 'fa-solid fa-tractor', underMaintenance = false},   
 }
 
 Config.CityHallBlip = {
