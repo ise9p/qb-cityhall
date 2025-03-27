@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Se9p'
 description 'City Hall system with multiple UI framework support'
-version '1.0.0'
+version '1.0.1'
 
 shared_script {
     'config.lua',
