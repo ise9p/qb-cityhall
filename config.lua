@@ -25,15 +25,7 @@ Config.target = 'qb' -- [ 'qb' qb-target or 'ox' ox_target ]
 ]]
 Config.Jobs = {
     {label = 'Unemployed', job = 'unemployed', grade = '0', icon = 'fas fa-broom', underMaintenance = false},  
-    {label = 'Garbage', job = 'garbage', grade = '0', icon = 'fas fa-trash', underMaintenance = false},  
-    {label = 'Tow Truck', job = 'tow', grade = '0', icon = 'fas fa-truck-loading', underMaintenance = true},  
-    {label = 'Trucker', job = 'trucker', grade = '0', icon = 'fas fa-truck', underMaintenance = false},  
-    {label = 'Fishing', job = 'fishing', grade = '0', icon = 'fa-solid fa-fish', underMaintenance = false},  
-    {label = 'Lumberjack', job = 'lumberjack', grade = '0', icon = 'fa-solid fa-tree', underMaintenance = false},  
-    {label = 'Mining', job = 'mining', grade = '0', icon = 'fa-solid fa-spoon', underMaintenance = false},  
-    {label = 'Taxi', job = 'taxi', grade = '0', icon = 'fa-solid fa-taxi', underMaintenance = false},  
-    {label = 'Bus', job = 'bus', grade = '0', icon = 'fa-solid fa-bus', underMaintenance = false}, 
-    {label = 'Farming', job = 'farming', grade = '0', icon = 'fa-solid fa-tractor', underMaintenance = false},   
+    {label = 'Garbage', job = 'garbage', grade = '0', icon = 'fas fa-trash', underMaintenance = false},    
 }
 
 Config.CityHallBlip = {
